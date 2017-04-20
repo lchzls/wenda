@@ -19,7 +19,7 @@ import java.util.*;
 /**
  * Created by Administrator on 2017/4/20.
  */
-@Controller
+//@Controller
 public class IndexController {
 
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
@@ -53,7 +53,7 @@ public class IndexController {
             map.put(String.valueOf(i),String.valueOf(i*i));
         }
         model.addAttribute("map",map);
-        model.addAttribute("user",new User("Jim"));
+     //   model.addAttribute("user",new User("Jim"));
         return "home";
     }
     @RequestMapping(path = {"/request"},method = RequestMethod.GET)
