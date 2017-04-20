@@ -1,0 +1,39 @@
+<html>
+<body>
+<pre>
+     #*
+     块注释
+     *#
+    $!{value1}
+    $!{value2} ##如果不存在，强制为空
+
+    #foreach($color in $colors)
+        this is color $!{foreach.index}: $color, $!{foreach.count}
+    #end
+
+    #foreach($key in $map.keySet())
+    Number: $key , value : $map.get($key)
+    #end
+
+    #foreach($kv in $map.entrySet())
+        Number : $kv.key , value: $kv.value
+    #end
+
+    User: $!{user.name}
+    $!{user.description} ##默认会去找get方法
+    $!{user.getDescription()}
+
+    #set($title = "nowcoder")
+    title: $!{title}
+
+    #parse("header.html")
+
+    #set($hello = "hello")
+    #set($helloworld1 = "$!{hello} world") ##双引号才解析，单引号不会解析
+    $!{hello}
+    $!{helloworld1}
+    #set($helloworld2 = '$!{hello} world')
+    $!{helloworld2}
+</pre>
+</body>
+</html>
