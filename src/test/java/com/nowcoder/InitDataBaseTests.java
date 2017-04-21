@@ -4,6 +4,7 @@ import com.nowcoder.dao.QuestionDAO;
 import com.nowcoder.dao.UserDAO;
 import com.nowcoder.model.Question;
 import com.nowcoder.model.User;
+import com.nowcoder.util.WendaUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,10 +37,10 @@ public class InitDataBaseTests {
 			user.setName(String.format("USER%d",i+1));
 			user.setHeadUrl(String.format("http://images.nowcoder.com/head/%dt.png", random.nextInt(1000)));
 			user.setPassword("");
-			user.setSalt("");
+			user.setSalt("salt");
 			userDAO.addUser(user);
 
-			user.setPassword("1234");
+			user.setPassword(WendaUtil.MD5("1234"+user.getSalt()));
 			userDAO.updatePassword(user);
 
 			Question question = new Question();
