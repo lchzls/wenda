@@ -1,12 +1,14 @@
 package com.nowcoder.controller;
 
 import com.nowcoder.model.*;
+import com.nowcoder.service.CommentService;
 import com.nowcoder.service.QuestionService;
 import com.nowcoder.service.UserService;
 import com.nowcoder.util.WendaUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,9 @@ public class QuestionController {
     QuestionService questionService;
 
     @Autowired
+    CommentService commentService;
+
+    @Autowired
     HostHolder hostHolder;
 
     @Autowired
@@ -34,7 +39,15 @@ public class QuestionController {
     public String questionDetail(Model model, @PathVariable("qid") int qid) {
         Question question = questionService.getById(qid);
         model.addAttribute("question", question);
-//        model.addAttribute("user",userService.getUser(question.getUserId()));
+        List<Comment> commentList = commentService.getCommentsByEntity(qid, EntityType.ENTITY_QUESTION);
+        List<ViewObject> vos = new ArrayList<>();
+        for (Comment comment : commentList) {
+            ViewObject vo = new ViewObject();
+            vo.set("comment", comment);
+            vo.set("user", userService.getUser(comment.getUserId()));
+            vos.add(vo);
+        }
+        model.addAttribute("comments", vos);
         return "detail";
     }
 

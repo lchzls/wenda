@@ -14,7 +14,6 @@
         var that = this;
     }
 
-    //ok的监听事件
     function fClickAdd() {
         var that = this;
         PopupAdd.show({

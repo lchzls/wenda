@@ -50,8 +50,6 @@ var oPopupAdd = new PopupAdd({
         val: fVal
     });
 
-    //点击提问按钮，在这里发起ajax请求，然后如果是999，则重定向去登录。否则，发送ok。
-    //然后，在home.js中监听到ok事件，就重定向到首页
     function fStaticShow(oConf) {
         var that = this;
         var oAdd = new PopupAdd(oConf);
